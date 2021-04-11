@@ -42,7 +42,11 @@ export const paramsOpts = {
     { label: '单注下限', value: 'single_bet_least' },
     { label: '单边上限', value: 'single_side_limit' },
     { label: '单场上限', value: 'single_game_limit' },
-    { label: '退水％', value: 'rebate_percent' },
+    {
+      label: '退水％',
+      value: 'rebate_percent',
+      help: '玩家下注洗碼返水, 比如玩家下注1000元, 欄位設定值0.5%, 則返水5元',
+    },
     { label: '下注状态', value: 'is_open_bet' },
   ],
   [MemberType.Agent]: [
@@ -51,8 +55,16 @@ export const paramsOpts = {
     { label: '单边上限', value: 'single_side_limit' },
     { label: '单场上限', value: 'single_game_limit' },
     { label: '占成', value: 'risk_percent' },
-    { label: '退水％', value: 'rebate_percent' },
-    { label: '服务费％', value: 'fee_percent' },
+    {
+      label: '退水％',
+      value: 'rebate_percent',
+      help: '玩家下注洗碼返水, 比如玩家下注1000元, 欄位設定值0.5%, 則返水5元',
+    },
+    {
+      label: '服务费％',
+      value: 'fee_percent',
+      help: '系統抽取玩家服務費5%, 欄位設定2%, 則分給此代理2%',
+    },
     { label: '下注状态', value: 'is_open_bet' },
   ],
 }

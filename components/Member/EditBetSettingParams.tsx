@@ -5,10 +5,11 @@ import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Checkbox, Form, InputNumber, Switch } from 'antd'
+import { Box, Button, HStack, Icon, SimpleGrid, Text } from '@chakra-ui/react'
+import { Checkbox, Form, InputNumber, Switch, Tooltip } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { useEffect, useMemo } from 'react'
+import { HiInformationCircle } from 'react-icons/hi'
 import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
@@ -66,7 +67,20 @@ function EditBetSettingParams({
               t.value !== 'is_open_bet' &&
               `上层 ${toCurrency(parentParams?.[t.value], 0)}`
             }
-            label={t.label}
+            label={
+              <HStack>
+                <Text>{t.label}</Text>
+                {t.help && (
+                  <Tooltip title={t.help}>
+                    <Icon
+                      color="orange.500"
+                      fontSize="md"
+                      as={HiInformationCircle}
+                    />
+                  </Tooltip>
+                )}
+              </HStack>
+            }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             rules={[
               { required: true },
