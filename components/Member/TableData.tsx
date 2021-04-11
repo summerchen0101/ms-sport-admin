@@ -235,14 +235,20 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '推广码/启用',
+        title: '推广连结/启用',
         render: (_, row) => (
           <HStack spacing="15px">
             <TipIconButton
               label="复制"
               icon={<HiOutlineClipboardCopy />}
               colorScheme="teal"
-              onClick={() => copyToClipboard(row.promo_code)}
+              onClick={() =>
+                copyToClipboard(
+                  `${process.env.memberUrl || 'https://ag88.online'}/p/${
+                    row.promo_code
+                  }`,
+                )
+              }
             />
             <MyCheckBox
               isChecked={row.is_promo}

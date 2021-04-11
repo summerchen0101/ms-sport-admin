@@ -3,9 +3,10 @@ import { MemberType } from '@/lib/enums'
 import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useHelper from '@/utils/useHelper'
-import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, HStack, Icon, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, Checkbox, InputNumber, Switch } from 'antd'
 import React, { useMemo } from 'react'
+import { HiInformationCircle } from 'react-icons/hi'
 import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
@@ -43,7 +44,12 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
             }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             key={t_i}
-            label={t.label}
+            label={
+              <HStack>
+                <Text>{t.label}</Text>
+                {/* <Icon as={HiInformationCircle} /> */}
+              </HStack>
+            }
             rules={[
               { required: true },
               {

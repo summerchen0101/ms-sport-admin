@@ -65,7 +65,7 @@ function TableData({ list }: { list: LeagueGroup[] }) {
         ),
       },
     ],
-    [],
+    [gameOpts],
   )
   return <BasicTable columns={columns} data={list} />
 }

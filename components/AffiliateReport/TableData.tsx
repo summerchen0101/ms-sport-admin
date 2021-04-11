@@ -148,7 +148,7 @@ function TableData({ list }: { list: MemberReport[] }) {
         ],
       },
     ],
-    [],
+    [affiliateLevelOpts],
   )
   return (
     <>
