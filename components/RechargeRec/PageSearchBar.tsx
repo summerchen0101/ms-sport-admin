@@ -40,24 +40,25 @@ function PageSearchBar() {
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
+    setIsSearchReady(true)
   }
   // 默认搜寻
   useEffect(() => {
-    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
-    setSearch((s) => ({
-      start_at: dateRanges[DateRangeType.Today][0].unix(),
-      end_at: dateRanges[DateRangeType.Today][1].unix(),
-    }))
-    setIsSearchReady(true)
+    onSearch()
   }, [])
 
   useEffect(() => {
-    fetchList(search)
-  }, [search])
+    isSearchReady && fetchList(search)
+  }, [search, isSearchReady])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+        <InlineFormField
+          name="date_range"
+          label="日期"
+          w={['auto', 'auto']}
+          initialValue={dateRanges[DateRangeType.Today]}
+        >
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range">

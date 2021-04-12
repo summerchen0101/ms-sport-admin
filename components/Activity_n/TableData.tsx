@@ -8,6 +8,7 @@ import { HStack, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
+import moment from 'moment'
 
 function TableData({ list }: { list: Activity[] }) {
   const { toDateTime } = useTransfer()
@@ -15,20 +16,15 @@ function TableData({ list }: { list: Activity[] }) {
   const { toCurrency, toDate } = useTransfer()
   const columns: ColumnsType<Activity> = useMemo(
     () => [
-      { title: '标题', render: (_, row) => row.title },
-      {
-        title: '开始日期',
-        render: (_, row) => (row.start_at ? toDate(row.start_at) : '-'),
-      },
-      {
-        title: '结束日期',
-        render: (_, row) => (row.end_at ? toDate(row.end_at) : '-'),
-      },
-      {
-        title: '红利',
-        render: (_, row) => <Text>${toCurrency(row.bonus)}</Text>,
-      },
-      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '活动名称', render: (_, row) => '首储1000送500' },
+      { title: '审核方式', render: (_, row) => '自动审核' },
+      { title: '礼金派发方式', render: (_, row) => '自动派发' },
+      { title: '活动类型', render: (_, row) => '储值金额' },
+      { title: '礼金类型', render: (_, row) => '按比例' },
+      { title: '礼金金額/比例', render: (_, row) => '50%' },
+      { title: '礼金上限', render: (_, row) => '1000' },
+      { title: '出金流水倍數', render: (_, row) => '60' },
+      { title: '更新时间', render: (_, row) => toDateTime(moment().unix()) },
       {
         title: '启用',
         render: (_, row) => (
@@ -61,7 +57,14 @@ function TableData({ list }: { list: Activity[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <BasicTable
+      columns={columns}
+      data={Array(3)
+        .fill('')
+        .map((t, i) => ({ id: i }))}
+    />
+  )
 }
 
 export default TableData

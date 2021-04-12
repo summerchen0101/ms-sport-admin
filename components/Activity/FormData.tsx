@@ -1,27 +1,33 @@
-import { ActivityType } from '@/lib/enums'
-import { activityTypeOpts } from '@/lib/options'
 import {
-  SimpleGrid,
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
   Stack,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
 } from '@chakra-ui/react'
-import { DatePicker, Form, FormInstance, Input, Radio, Select } from 'antd'
+import {
+  Col,
+  DatePicker,
+  Form,
+  FormInstance,
+  Input,
+  InputNumber,
+  Radio,
+  Row,
+  Switch,
+} from 'antd'
 import { Moment } from 'moment'
+import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
+// import ContentEditor from '../ContentEditor'
+import ImageUpload from '../ImageUpload'
 import InlineFormField from '../InlineFormField'
-import BetSumForm from './BetSumForm'
-import ContinueLogin from './ContinueLogin'
-import RechargeForm from './RechargeForm'
 
-const formFieldMap = {
-  [ActivityType.Recharge]: RechargeForm,
-  [ActivityType.Betting]: BetSumForm,
-  [ActivityType.LoginTimes]: ContinueLogin,
-}
+const ContentEditor = dynamic(() => import('@/components/ContentEditor'), {
+  ssr: false,
+})
 
 export interface ActivityFormProps {
   id?: number
@@ -43,6 +49,14 @@ function FormData({
   data: ActivityFormProps
   form: FormInstance<ActivityFormProps>
 }) {
+  // const disabledDate = (current) => {
+  //   return current && current < moment().startOf('day')
+  // }
+
+  const mediaTyps = [
+    { label: '网页版内容', content: 'content', img: 'img' },
+    { label: '手机版内容', content: 'content_mobile', img: 'img_mobile' },
+  ]
   useEffect(() => {
     form.resetFields()
   }, [])
@@ -55,79 +69,56 @@ function FormData({
       >
         <Input placeholder="请输入内容" />
       </Form.Item>
-      <SimpleGrid columns={[1, 2]} spacingX="30px">
-        <Form.Item label="审核方式">
-          <Select
-            options={[
-              { label: '自动审核', value: 1 },
-              { label: '人工审核', value: 2 },
-            ]}
-            defaultValue={1}
-          />
-        </Form.Item>
-        <Form.Item label="礼金派发方式">
-          <Select
-            options={[
-              { label: '自动派发', value: 1 },
-              { label: '人工派发', value: 2 },
-            ]}
-            defaultValue={1}
-          />
-        </Form.Item>
-
-        {/* <Form.Item label="活动类型" name="type">
-          <Select
-            options={activityTypeOpts}
-            placeholder="请选择"
-          />
-        </Form.Item> */}
-      </SimpleGrid>
-      {/* <Form.Item label="活动时间" name="date_range_type">
+      <Row gutter={16}>
+        <Col span={12}>
+          <Form.Item label="红利" name="bonus" rules={[{ required: true }]}>
+            <Box as={InputNumber} min={1} w="100%" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item label="状态" name="is_active" valuePropName="checked">
+            <Switch />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Form.Item label="期间" name="date_range_type">
         <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
           <Radio value="forever">无限期</Radio>
           <Radio value="limit">
-            <InlineFormField noStyle name="limit_range" w={['auto', 'auto']}>
+            <InlineFormField name="limit_range" w={['auto', 'auto']}>
               <DatePicker.RangePicker />
             </InlineFormField>
           </Radio>
         </Stack>
-      </Form.Item> */}
-      {/* <Form.Item label="结算週期" name="date_range_type">
-        <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
-          <Radio value="1">活动结束时</Radio>
-          <Radio value="2">
-            <InlineFormField noStyle>
-              <TimePicker use12Hours format="h:mm a" showNow={false} />
-            </InlineFormField>
-          </Radio>
-        </Stack>
-      </Form.Item> */}
-      <Tabs variant="soft-rounded" colorScheme="red">
-        <TabList flexWrap="wrap" mb="10px">
-          {activityTypeOpts.map((t) => (
-            <Tab
-              key={t.value}
-              fontSize="sm"
-              py="5px"
-              px="10px"
-              borderRadius="sm"
-              _focus={{}}
-            >
-              {t.label}
-            </Tab>
-          ))}
-        </TabList>
-        <TabPanels>
-          {activityTypeOpts.map((t) => {
-            const Component = formFieldMap[t.value]
-            return (
-              <TabPanel key={t.value} px="10px">
-                <Component />
-              </TabPanel>
-            )
-          })}
-        </TabPanels>
-      </Tabs>
+      </Form.Item>
+
+      <Accordion defaultIndex={[0]} allowMultiple colorScheme="brand">
+        {mediaTyps.map((t, i) => (
+          <AccordionItem key={i}>
+            <AccordionButton>
+              <Box flex="1" textAlign="left" fontSize="14px">
+                {t.label}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel py={4}>
+              <Form.Item
+                name={t.img}
+                rules={[{ required: true, message: '请选择图片' }]}
+              >
+                <ImageUpload />
+              </Form.Item>
+              <Form.Item
+                label="内容"
+                name={t.content}
+                rules={[{ required: true, message: '请输入活动内容' }]}
+              >
+                <ContentEditor />
+              </Form.Item>
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </Form>
   )
 }
