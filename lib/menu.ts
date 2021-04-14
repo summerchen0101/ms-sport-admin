@@ -52,6 +52,11 @@ const menu: MenuTree = {
     path: '/activity',
     pages: {
       activity: { name: '活动管理', path: '/activity/manage' },
+      package: {
+        name: '活动行销组合',
+        path: '/activity/package',
+        menuHidden: true,
+      },
       review: { name: '活动审核', path: '/activity/review' },
     },
   },

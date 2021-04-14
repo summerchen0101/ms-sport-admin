@@ -13,7 +13,7 @@ import useErrorHandler from '../useErrorHandler'
 
 function useRechargeRecService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<RechargeRec>()
+  const { setList, setRechargeRecSummary } = useDataContext<RechargeRec>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<RechargeRecListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
@@ -25,6 +25,7 @@ function useRechargeRecService() {
     try {
       const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setRechargeRecSummary(res.data.summary)
       setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)

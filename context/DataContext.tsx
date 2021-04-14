@@ -3,6 +3,7 @@ import { BetRatio } from '@/types/api/BetRatio'
 import { BetRecordSummary } from '@/types/api/BetRecord'
 import { Dashboard } from '@/types/api/Dashboard'
 import { BetSetting } from '@/types/api/Member'
+import { RechargeRecSummary } from '@/types/api/RechargeRec'
 import React, { createContext, useContext, useState } from 'react'
 
 type ContextState<T> = {
@@ -26,6 +27,10 @@ type ContextState<T> = {
   setDashboardInfo: React.Dispatch<React.SetStateAction<Dashboard>>
   betSummary: BetRecordSummary
   setBetSummary: React.Dispatch<React.SetStateAction<BetRecordSummary>>
+  rechargeRecSummary: RechargeRecSummary
+  setRechargeRecSummary: React.Dispatch<
+    React.SetStateAction<RechargeRecSummary>
+  >
 }
 
 const DataContext = createContext<ContextState<any>>(null)
@@ -41,6 +46,10 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [accountingSection, setAccountingSection] = useState<Section>()
   const [dashboardInfo, setDashboardInfo] = useState<Dashboard>()
   const [betSummary, setBetSummary] = useState<BetRecordSummary>()
+  const [
+    rechargeRecSummary,
+    setRechargeRecSummary,
+  ] = useState<RechargeRecSummary>()
   return (
     <DataContext.Provider
       value={{
@@ -64,6 +73,8 @@ const DataProvider: React.FC = function <T>({ children }) {
         setDashboardInfo,
         betSummary,
         setBetSummary,
+        rechargeRecSummary,
+        setRechargeRecSummary,
       }}
     >
       {children}
