@@ -116,7 +116,7 @@ function TableData({ list }: { list: Member[] }) {
 
   const columns = useMemo(() => {
     const columnKeys =
-      list?.[0].member_type === MemberType.Member
+      list?.[0]?.member_type === MemberType.Member
         ? memberFilterColumns
         : agentFilterColumns
     const _columns: ColumnsType<Member> = [
