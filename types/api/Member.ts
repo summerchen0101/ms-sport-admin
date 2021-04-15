@@ -90,6 +90,7 @@ export type MemberWithBetSettings = Member & {
 
 export interface MemberListRequest extends DateRangeListRequest {
   agent_id?: number
+  parent_id?: number
   member_type?: MemberType
   acc?: string
   is_active?: Status

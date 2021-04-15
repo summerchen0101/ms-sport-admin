@@ -30,10 +30,8 @@ function EditFormData({
   data: EditMemberFormProps
   form: FormInstance<EditMemberFormProps>
 }) {
-  const { fetchAffiliateLevelOptions } = useOptionsService()
   const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
   useEffect(() => {
-    fetchAffiliateLevelOptions()
     form.resetFields()
   }, [])
   return (
@@ -63,20 +61,24 @@ function EditFormData({
         <Form.Item label="会员备注" name="note">
           <Input />
         </Form.Item>
-        <Form.Item
-          label="佣金等级"
-          name="promo_level"
-          rules={[{ required: true }]}
-        >
-          <Select options={affiliateLevelOpts} placeholder="请选择" />
-        </Form.Item>
-        <Form.Item
-          label="佣金等级锁定"
-          name="is_lock_promo_level"
-          valuePropName="checked"
-        >
-          <Switch />
-        </Form.Item>
+        {data.member_type === MemberType.Member && (
+          <>
+            <Form.Item
+              label="佣金等级"
+              name="promo_level"
+              rules={[{ required: true }]}
+            >
+              <Select options={affiliateLevelOpts} placeholder="请选择" />
+            </Form.Item>
+            <Form.Item
+              label="佣金等级锁定"
+              name="is_lock_promo_level"
+              valuePropName="checked"
+            >
+              <Switch />
+            </Form.Item>
+          </>
+        )}
       </SimpleGrid>
     </Form>
   )
