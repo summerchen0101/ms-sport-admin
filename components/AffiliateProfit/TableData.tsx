@@ -77,7 +77,7 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
         title: '派发金额',
         render: (_, row) => (
           <Text fontWeight="bold" color="blue.500">
-            {row.fee_profit}
+            {row.amount}
           </Text>
         ),
         align: 'center',
