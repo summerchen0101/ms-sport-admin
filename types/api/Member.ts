@@ -50,6 +50,8 @@ export interface Member {
 
   promo_level: number
   is_lock_promo_level: boolean
+
+  balance_sum: number
 }
 
 export interface BetSetting {

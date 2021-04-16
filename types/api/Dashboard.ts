@@ -22,6 +22,16 @@ export interface Dashboard {
   register_count: number
   member_count: number
   login_count: number
+
+  not_accounting_bet_sum: number
+  member_balance_sum: number
+  real_name_count: number
+  bank_card_count: number
+
+  recharge_add_count: number
+  recharge_sub_count: number
+  recharge_add_sum: number
+  recharge_sub_sum: number
 }
 
 export interface DashboardRequest {

@@ -48,11 +48,7 @@ function PageSearchBar() {
 
   // 默认搜寻
   useEffect(() => {
-    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
-    setSearch((s) => ({
-      start_at: dateRanges[DateRangeType.Today][0].unix(),
-      end_at: dateRanges[DateRangeType.Today][1].unix(),
-    }))
+    onSearch()
   }, [])
 
   useEffect(() => {
@@ -73,7 +69,12 @@ function PageSearchBar() {
           <Input />
         </InlineFormField> */}
 
-        <InlineFormField name="date_range" label="开赛日期" w={['auto']}>
+        <InlineFormField
+          name="date_range"
+          label="开赛日期"
+          w={['auto']}
+          initialValue={dateRanges[DateRangeType.Today]}
+        >
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         {/* <InlineFormField name="date_range">

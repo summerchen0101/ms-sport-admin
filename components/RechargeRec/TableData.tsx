@@ -54,7 +54,7 @@ function TableData({ list }: { list: RechargeRec[] }) {
         render: (_, row) => row.note,
       },
 
-      { title: '操作时间', render: (_, row) => toDateTime(moment().unix()) },
+      { title: '操作时间', render: (_, row) => toDateTime(row.created_at) },
     ],
     [],
   )

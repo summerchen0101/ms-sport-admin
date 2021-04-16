@@ -61,23 +61,12 @@ const menu: MenuTree = {
     },
   },
 
-  // activity: {
-  //   name: '优惠活动',
-  //   icon: 'HiTag',
-  //   path: '/activity',
-  //   pages: {
-  //     activity: { name: '活动管理', path: '/activity/manage' },
-  //     package: { name: '活动行销组合', path: '/activity/package' },
-  //     review: { name: '活动审核', path: '/activity/review' },
-  //   },
-  // },
-
   member: {
     name: '会员管理',
     icon: 'HiUserGroup',
     pages: {
       member: { name: '会员列表', path: '/member/manage' },
-      level: { name: '会员级别管理', path: '/member/level' },
+      level: { name: '会员级别管理', path: '/member/level', menuHidden: true },
       tag: { name: '会员标籤', path: '/member/tag' },
       bank: { name: '会员银行卡', path: '/member/bank' },
       realName: { name: '实名认证', path: '/member/real-name' },
@@ -204,7 +193,11 @@ const menu: MenuTree = {
         path: '/sport/default-bet',
         menuHidden: true,
       },
-      handicapDiff: { name: '盘口管理', path: '/sport/handicap-diff' },
+      handicapDiff: {
+        name: '盘口管理',
+        path: '/sport/handicap-diff',
+        menuHidden: true,
+      },
     },
   },
 }
