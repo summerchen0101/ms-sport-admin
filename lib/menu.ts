@@ -55,7 +55,6 @@ const menu: MenuTree = {
       package: {
         name: '活动行销组合',
         path: '/activity/package',
-        menuHidden: true,
       },
       review: { name: '活动审核', path: '/activity/review' },
     },
