@@ -162,6 +162,15 @@ a {
   background-color: rgb(245, 244, 244);
 }
 
+.ant-table tfoot.ant-table-summary {
+  background-color: #ddd;
+  font-weight: bold;
+  > tr > td {
+    border-right: 1px solid #c7c5c5;
+    // border-top: 1px solid #c7c5c5;
+  }
+}
+
 
 .ant-pagination-item {
   border: 0;

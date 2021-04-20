@@ -61,9 +61,9 @@ export const paramsOpts = {
       help: '玩家下注洗碼返水, 比如玩家下注1000元, 欄位設定值0.5%, 則返水5元',
     },
     {
-      label: '服务费％',
+      label: '佣金％',
       value: 'fee_percent',
-      help: '系統抽取玩家服務費5%, 欄位設定2%, 則分給此代理2%',
+      help: '系統抽取玩家佣金5%, 欄位設定2%, 則分給此代理2%',
     },
     { label: '下注状态', value: 'is_open_bet' },
   ],

@@ -13,8 +13,6 @@ import useTransfer from '@/utils/useTransfer'
 import { InfoIcon } from '@chakra-ui/icons'
 import {
   Box,
-  Checkbox,
-  Circle,
   HStack,
   Icon,
   Spacer,
@@ -37,12 +35,12 @@ import {
   HiOutlineX,
   HiPencilAlt,
   HiPlus,
-  HiPlusCircle,
   HiStar,
   HiX,
 } from 'react-icons/hi'
 import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
+import MyTooltip from '../MyTooltip'
 import ColorTag from './ColorTag'
 
 type MemberFields = keyof Member
@@ -213,6 +211,16 @@ function TableData({ list }: { list: Member[] }) {
         title: '子帐号',
         key: 'shadow_count',
         render: (_, row) => toCurrency(row.shadow_count, 0),
+      },
+      {
+        title: (
+          <HStack>
+            <Text>代理会员</Text>
+            <MyTooltip tip="「代理会员」是有开启推广功能的会员" />
+          </HStack>
+        ),
+        key: 'promo_count',
+        render: (_, row) => toCurrency(row.promo_count, 0),
       },
       {
         title: '帐务类型',

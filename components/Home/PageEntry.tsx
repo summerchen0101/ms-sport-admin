@@ -91,7 +91,7 @@ const PageEntry: React.FC = () => {
                 color="pink"
                 label="扣点累计"
                 num={dashboardInfo?.recharge_sub_sum}
-                icon={BiArrowToTop}
+                icon={BiArrowFromBottom}
                 onClick={() =>
                   router.push({
                     pathname: menu.trade.pages.recharge.path,

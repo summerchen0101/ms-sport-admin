@@ -10,7 +10,7 @@ import useBetRecordService from '@/utils/services/useBetRecordService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
 import { Box, HStack, Text } from '@chakra-ui/react'
-import { ColumnsType } from 'antd/lib/table'
+import Table, { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
 import { HiOutlineArrowLeft, HiOutlineEye } from 'react-icons/hi'
@@ -110,7 +110,7 @@ function TableData({ list }: { list: BetRecord[] }) {
         },
       },
       { title: '下注金额', render: (_, row) => toCurrency(row.amount) },
-      { title: '有效金额', render: (_, row) => toCurrency(row.valid_amount) },
+      { title: '累计流水', render: (_, row) => toCurrency(row.valid_amount) },
       {
         title: '服务费',
         render: (_, row) => <ColorText num={row.fee} />,
@@ -120,7 +120,7 @@ function TableData({ list }: { list: BetRecord[] }) {
         render: (_, row) => <Text>{toCurrency(row.rebate)}</Text>,
       },
       {
-        title: '会员结果',
+        title: '输赢结果',
         render: (_, row) => <ColorText num={row.result} />,
       },
       {
@@ -154,15 +154,52 @@ function TableData({ list }: { list: BetRecord[] }) {
       {betSummary && (
         <TableSummary>
           <TableSummaryItem label="总笔数" num={betSummary.count} decimal={0} />
-          <TableSummaryItem label="累计注额" num={betSummary.amount} />
+          <TableSummaryItem label="下注金额" num={betSummary.amount} />
           <TableSummaryItem label="累计流水" num={betSummary.valid_amount} />
+          <TableSummaryItem label="退水">
+            <ColorText num={betSummary.rebate} />
+          </TableSummaryItem>
+          <TableSummaryItem label="手续费">
+            <ColorText num={betSummary.fee} />
+          </TableSummaryItem>
           <TableSummaryItem label="输赢结果">
             <ColorText num={betSummary.result} />
           </TableSummaryItem>
         </TableSummary>
       )}
 
-      <BasicTable columns={columns} data={list} />
+      <BasicTable
+        columns={columns}
+        data={list}
+        summary={
+          betSummary &&
+          (() => {
+            return (
+              <Table.Summary.Row>
+                <Table.Summary.Cell index={0} colSpan={7}>
+                  <Text textAlign="right">跨页统计</Text>
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={1}>
+                  {toCurrency(betSummary.amount, 0)}
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={2}>
+                  {toCurrency(betSummary.valid_amount, 0)}
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={3}>
+                  <ColorText num={betSummary.fee} />
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={4}>
+                  <ColorText num={betSummary.rebate} />
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={5}>
+                  <ColorText num={betSummary.result} />
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={6}></Table.Summary.Cell>
+              </Table.Summary.Row>
+            )
+          })
+        }
+      />
     </>
   )
 }

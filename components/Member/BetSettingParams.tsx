@@ -94,7 +94,6 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
               <CurrencyInputNumber
                 id={`${game.value}-${section.value}-${play.value}-${t.value}`}
                 style={{ width: '100%' }}
-                step={100}
                 min={0}
               />
             )}

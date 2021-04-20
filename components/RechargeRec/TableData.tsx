@@ -75,22 +75,6 @@ function TableData({ list }: { list: RechargeRec[] }) {
               筆
             </Text>
           </Stack>
-          {/* <TableSummaryItem
-            label="加点笔数"
-            num={summary.add_count}
-            decimal={0}
-          />
-          <TableSummaryItem label="加点总额">
-            <ColorText num={summary.add_sum} />
-          </TableSummaryItem>
-          <TableSummaryItem
-            label="扣點筆數"
-            num={summary.sub_count}
-            decimal={0}
-          />
-          <TableSummaryItem label="扣点总额">
-            <ColorText num={summary.sub_sum} />
-          </TableSummaryItem> */}
         </TableSummary>
       )}
       <BasicTable columns={columns} data={list} />

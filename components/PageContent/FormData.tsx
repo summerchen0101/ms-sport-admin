@@ -1,5 +1,11 @@
 import { Col, Form, FormInstance, Input, Row, Switch } from 'antd'
+import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
+
+const ContentEditor = dynamic(() => import('@/components/ContentEditor'), {
+  ssr: false,
+})
+
 export interface PageContentFormProps {
   id?: number
   title: string
@@ -47,7 +53,7 @@ function FormData({
           name={t.name}
           rules={[{ required: true }]}
         >
-          <Input.TextArea />
+          <ContentEditor />
         </Form.Item>
       ))}
     </Form>
