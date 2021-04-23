@@ -188,7 +188,7 @@ export const paymentTypeOpts = [
   { label: '超商：莱尔富', value: PaymentType.LIFE },
   { label: '超商：OK', value: PaymentType.OK },
   { label: '微信支付', value: PaymentType.WeChat },
-  { label: '阿里支付', value: PaymentType.AliPay },
+  { label: '支付宝', value: PaymentType.AliPay },
   { label: '街口支付', value: PaymentType.CornerPay },
   { label: 'Line钱包', value: PaymentType.Line },
   { label: 'Apple Pay', value: PaymentType.ApplePay },

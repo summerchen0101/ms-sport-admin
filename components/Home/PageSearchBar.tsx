@@ -1,14 +1,12 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
-import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType, YesNo } from '@/lib/enums'
 import { yesNoOpts } from '@/lib/options'
-import { DashboardRequest } from '@/types/api/Dashboard'
 import useDashboardService from '@/utils/services/useDashboardService'
 import useTransfer from '@/utils/useTransfer'
 import { Spacer } from '@chakra-ui/react'
-import { Button, DatePicker, Form, Input, Select } from 'antd'
+import { DatePicker, Form, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -37,6 +35,12 @@ function PageSearchBar() {
 
   useEffect(() => {
     onSearch()
+    const interval = setInterval(() => {
+      onSearch()
+    }, 60 * 1000)
+    return () => {
+      clearInterval(interval)
+    }
   }, [])
   return (
     <SearchBar isOpen={visible} form={form}>

@@ -78,7 +78,19 @@ function useOptionsService() {
   const fetchLeagueOptions = useCallback(async (game_code: string) => {
     try {
       const res = await API.leagues(game_code)
-      setLeagues(toOptionTypes(res.data.list))
+      setLeagues(
+        toOptionTypes(
+          res.data.list.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1
+            }
+            if (a.name > b.name) {
+              return 1
+            }
+            return 0
+          }),
+        ),
+      )
     } catch (err) {
       apiErrHandler(err)
     }

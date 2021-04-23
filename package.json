@@ -6,9 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "push:ag-admin": "git push work dev:dev",
-    "push:ag-agent": "git push ag-agent agent:dev",
-    "push:st-admin": "git push st st:dev",
+    "push:ag-admin": "git push ag-admin ag-admin:dev",
+    "push:ag-agent": "git push ag-agent ag-agent:dev",
+    "push:st-admin": "git push st-admin st-admin:dev",
     "push:st-agent": "git push st-agent st-agent:dev",
     "startdev": "next start -p 8083"
   },

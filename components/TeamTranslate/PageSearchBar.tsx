@@ -11,7 +11,7 @@ import {
 } from '@/types/api/TeamTranslate'
 import useOptionsService from '@/utils/services/useOptionsService'
 import useTeamTranslateService from '@/utils/services/useTeamTranslateService'
-import { Spacer } from '@chakra-ui/layout'
+import { Box, Spacer } from '@chakra-ui/layout'
 import { Form, Select } from 'antd'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -63,11 +63,13 @@ function PageSearchBar() {
         label="联盟"
         rules={[{ required: true }]}
       >
-        <Select
+        <Box
+          as={Select}
           options={leagueOpts}
           placeholder="请选择"
           showSearch
           optionFilterProp="label"
+          minW={['auto', null, '400px']}
         />
       </InlineFormField>
       <Spacer />
