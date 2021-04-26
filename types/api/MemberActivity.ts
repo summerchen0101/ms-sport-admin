@@ -1,4 +1,5 @@
 import { DateRangeListRequest } from '..'
+import { ParentTreeItem } from './Member'
 export interface MemberActivity {
   id: number
   name: string
@@ -28,6 +29,7 @@ export interface MemberActivityListRequest extends DateRangeListRequest {
 
 export interface MemberActivityListResponse {
   list: MemberActivity[]
+  parent_tree: ParentTreeItem[]
   total_count: number
   total_page: number
 }

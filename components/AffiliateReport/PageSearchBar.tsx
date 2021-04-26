@@ -2,7 +2,7 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { YesNo } from '@/lib/enums'
+import { MemberType, YesNo } from '@/lib/enums'
 import { yesNoOpts } from '@/lib/options'
 import { MemberReportListRequest } from '@/types/api/MemberReport'
 import useMemberReportService from '@/utils/services/useMemberReportService'
@@ -10,6 +10,7 @@ import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import moment, { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
+import { ParsedUrlQuery } from 'querystring'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import SearchBarContent from '../SearchBarContent'
@@ -19,6 +20,7 @@ type SearchFormType = {
   acc: string
   month: Moment
   is_test: number
+  member_type: MemberType
 }
 
 function PageSearchBar() {
@@ -34,14 +36,19 @@ function PageSearchBar() {
       start_at: d.month?.startOf('month')?.unix(),
       end_at: d.month?.endOf('month')?.unix(),
       is_test: d.is_test,
+      member_type:
+        +((router.query?.type as unknown) as MemberType) || MemberType.Agent,
+      [+router.query?.type === MemberType.Member ? 'parent_id' : 'agent_id']:
+        +router.query?.pid || 0,
     })
   }
   useEffect(() => {
     onSearch()
-  }, [])
+  }, [router])
+
   useEffect(() => {
-    search && fetchList({ ...search, parent_id: +router.query?.pid })
-  }, [search, router])
+    search && fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>

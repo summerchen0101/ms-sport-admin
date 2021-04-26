@@ -15,11 +15,12 @@ import { Button, Descriptions, Divider, Modal } from 'antd'
 import React, { useEffect } from 'react'
 import { BiMinus, BiPlus, BiTime, BiX } from 'react-icons/bi'
 import ColorText from '../ColorText'
-
+import ParentTree from '../ParentTree'
+import { AfiiliateProfitEditData } from './TableData'
 function EditPopup() {
   const { setStatus } = useAffiliateProfitService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<AffiliateProfit & MemberReport>()
+  const { viewData } = useDataContext<AfiiliateProfitEditData>()
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
   const [isSmaller] = useMediaQuery('(max-width : 768px)')
   const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
@@ -66,6 +67,9 @@ function EditPopup() {
       >
         <Descriptions.Item label="帐号/暱称" span={2}>
           {viewData.member.acc} [{viewData.member.name}]
+        </Descriptions.Item>
+        <Descriptions.Item label="阶层资讯" span={2}>
+          <ParentTree tree={viewData.parent_tree} />
         </Descriptions.Item>
         <Descriptions.Item label="总会员数">
           {viewData.member_count}

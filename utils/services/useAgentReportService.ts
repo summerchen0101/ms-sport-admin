@@ -8,7 +8,7 @@ import useErrorHandler from '../useErrorHandler'
 
 function useAgentReportService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<AgentReport>()
+  const { setList, setParentTree } = useDataContext<AgentReport>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<AgentReportListRequest>()
   const API = useAgentReportAPI()
@@ -19,6 +19,7 @@ function useAgentReportService() {
       const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
       setTotalCount(res.data.total_count)
+      setParentTree(res.data.parent_tree)
     } catch (err) {
       apiErrHandler(err)
     }

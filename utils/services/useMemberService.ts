@@ -24,6 +24,7 @@ function useMemberService() {
     setViewData,
     setBetSettings,
     setParentBetSettings,
+    setParentTree,
   } = useDataContext<Member>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<MemberListRequest>()
@@ -41,6 +42,7 @@ function useMemberService() {
       const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
       setTotalCount(res.data.total_count)
+      setParentTree(res.data.parent_tree)
     } catch (err) {
       apiErrHandler(err)
     }
@@ -108,6 +110,14 @@ function useMemberService() {
   const setPromo = async (id: number, is_active: boolean) => {
     try {
       await API.promo({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const setWithdraw = async (id: number, is_active: boolean) => {
+    try {
+      await API.withdraw({ id, is_active })
       setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)
@@ -210,6 +220,7 @@ function useMemberService() {
     setStatus,
     setRealName,
     setPromo,
+    setWithdraw,
     doCreate,
     doEdit,
     doDelete,

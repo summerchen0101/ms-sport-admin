@@ -8,7 +8,7 @@ import useErrorHandler from '../useErrorHandler'
 
 function useMemberReportService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<MemberReport>()
+  const { setList, setParentTree } = useDataContext<MemberReport>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<MemberReportListRequest>()
   const API = useMemberReportAPI()
@@ -19,6 +19,7 @@ function useMemberReportService() {
       const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
       setTotalCount(res.data.total_count)
+      setParentTree(res.data.parent_tree)
     } catch (err) {
       apiErrHandler(err)
     }

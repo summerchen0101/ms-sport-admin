@@ -1,18 +1,21 @@
 import BasicTable from '@/components/BasicTable'
+import { useDataContext } from '@/context/DataContext'
 import menu from '@/lib/menu'
 import { MemberActivity } from '@/types/api/MemberActivity'
 import useTransfer from '@/utils/useTransfer'
-import { Text } from '@chakra-ui/layout'
+import { HStack, Text } from '@chakra-ui/layout'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
+import ParentTree from '../ParentTree'
 import TipIconButton from '../TipIconButton'
 
 function TableData({ list }: { list: MemberActivity[] }) {
   const { toCurrency } = useTransfer()
   const router = useRouter()
+  const { parentTree } = useDataContext()
   const columns: ColumnsType<MemberActivity> = useMemo(
     () => [
       {
@@ -97,16 +100,19 @@ function TableData({ list }: { list: MemberActivity[] }) {
   )
   return (
     <>
-      {router?.query?.pid && (
-        <TipIconButton
-          label="回上页"
-          icon={<HiOutlineArrowLeft />}
-          onClick={() => router.back()}
-          colorScheme="brand"
-          bgColor="gray.600"
-          mb="10px"
-        />
-      )}
+      <HStack>
+        {router?.query?.pid && (
+          <TipIconButton
+            label="回上页"
+            icon={<HiOutlineArrowLeft />}
+            onClick={() => router.back()}
+            colorScheme="brand"
+            bgColor="gray.600"
+            mb="10px"
+          />
+        )}
+        <ParentTree tree={parentTree} />
+      </HStack>
       <BasicTable columns={columns} data={list} />
     </>
   )

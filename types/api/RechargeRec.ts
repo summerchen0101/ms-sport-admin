@@ -1,4 +1,4 @@
-import { ProcessStatus, RechargeType } from '@/lib/enums'
+import { ProcessStatus, RechargeType, WalletRecType } from '@/lib/enums'
 import { DateRangeListRequest, MemberBasic } from '..'
 export interface RechargeRec {
   id: number
@@ -12,11 +12,14 @@ export interface RechargeRec {
   editor: string
   created_at: number
   updated_at: number
+
+  wallet_rec_type: WalletRecType
 }
 
 export interface RechargeRecListRequest extends DateRangeListRequest {
   acc?: string
   recharge_type?: RechargeType
+  wallet_rec_type?: WalletRecType
 }
 
 export interface RechargeRecSummary {

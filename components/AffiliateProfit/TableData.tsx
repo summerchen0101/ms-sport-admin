@@ -3,13 +3,14 @@ import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { ProcessStatus, RewardProcess } from '@/lib/enums'
+import { MemberType, ProcessStatus, RewardProcess } from '@/lib/enums'
 import menu from '@/lib/menu'
 import { processStatusOpts, rewardProcessOpts } from '@/lib/options'
 import {
   AffiliateProfit,
   AffiliateProfitListRequest,
 } from '@/types/api/AffiliateProfit'
+import { ParentTreeItem } from '@/types/api/Member'
 import { MemberReport } from '@/types/api/MemberReport'
 import useMemberReportAPI from '@/utils/apis/useMemberReportAPI'
 import useMemberReportService from '@/utils/services/useMemberReportService'
@@ -22,9 +23,12 @@ import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { HiOutlineArrowLeft, HiPencilAlt } from 'react-icons/hi'
 
+export type AfiiliateProfitEditData = AffiliateProfit &
+  MemberReport & { parent_tree: ParentTreeItem[] }
+
 function TableData({ list }: { list: AffiliateProfit[] }) {
   const { toDateTime } = useTransfer()
-  const { setViewData } = useDataContext<AffiliateProfit & MemberReport>()
+  const { setViewData } = useDataContext<AfiiliateProfitEditData>()
   const [, setReviewVisible] = usePopupContext('editForm')
   const { fetchAll } = useMemberReportAPI()
   const { search, setSearch } = useSearchContext<AffiliateProfitListRequest>()
@@ -34,10 +38,15 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
       start_at: moment(search?.accounting_date).startOf('month').unix(),
       end_at: moment(search?.accounting_date).endOf('month').unix(),
       acc: data.member.acc,
+      member_type: MemberType.Member,
       page: 1,
       perpage: 1,
     })
-    setViewData({ ...data, ...res.data.list[0] })
+    setViewData({
+      ...data,
+      ...res.data.list[0],
+      parent_tree: res.data.parent_tree,
+    })
     setReviewVisible(true)
   }
   const { toOptionName, toDate, toCurrency } = useTransfer()
@@ -74,9 +83,18 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
         align: 'center',
       },
       {
-        title: '派发金额',
+        title: '总派发金额',
         render: (_, row) => (
           <Text fontWeight="bold" color="blue.500">
+            {toCurrency(row.fee_profit)}
+          </Text>
+        ),
+        align: 'center',
+      },
+      {
+        title: '下线派发',
+        render: (_, row) => (
+          <Text fontWeight="bold" color="orange.500">
             {toCurrency(row.amount)}
           </Text>
         ),

@@ -11,7 +11,7 @@ import useErrorHandler from '../useErrorHandler'
 
 function useMemberActivityService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<MemberActivity>()
+  const { setList, setParentTree } = useDataContext<MemberActivity>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<MemberActivityListRequest>()
   const API = useMemberActivityAPI()
@@ -22,6 +22,7 @@ function useMemberActivityService() {
       const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
       setTotalCount(res.data.total_count)
+      setParentTree(res.data.parent_tree)
     } catch (err) {
       apiErrHandler(err)
     }

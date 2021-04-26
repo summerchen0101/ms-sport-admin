@@ -3,8 +3,8 @@ import SearchBar from '@/components/SearchBar'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { DateRangeType, RechargeType } from '@/lib/enums'
-import { rechargeTypeOpts } from '@/lib/options'
+import { DateRangeType, RechargeType, WalletRecType } from '@/lib/enums'
+import { rechargeTypeOpts, walletRecTypeOpts } from '@/lib/options'
 import { RechargeRecListRequest } from '@/types/api/RechargeRec'
 import useRechargeRecService from '@/utils/services/useRechargeRecService'
 import useTransfer from '@/utils/useTransfer'
@@ -19,6 +19,7 @@ import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   recharge_type: RechargeType
+  wallet_rec_type: WalletRecType
   acc: string
   date_range: [Moment, Moment]
 }
@@ -34,9 +35,10 @@ function PageSearchBar() {
   const onSearch = async () => {
     const d = await form.validateFields()
     setPage(1)
-    await setSearch({
+    setSearch({
       acc: d.acc,
       recharge_type: d.recharge_type,
+      wallet_rec_type: d.wallet_rec_type,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
@@ -67,6 +69,20 @@ function PageSearchBar() {
         <InlineFormField name="recharge_type" label="类型" initialValue={0}>
           <Select
             options={[{ label: '全部', value: 0 }, ...rechargeTypeOpts]}
+          />
+        </InlineFormField>
+        <InlineFormField
+          name="wallet_rec_type"
+          label="纪录属性"
+          initialValue={0}
+        >
+          <Select
+            options={[
+              { label: '全部', value: 0 },
+              ...walletRecTypeOpts.filter((t) =>
+                [WalletRecType.Manual, WalletRecType.Deposit].includes(t.value),
+              ),
+            ]}
           />
         </InlineFormField>
 

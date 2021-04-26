@@ -1,7 +1,7 @@
 import BasicTable from '@/components/BasicTable'
 import { useDataContext } from '@/context/DataContext'
-import { RechargeType } from '@/lib/enums'
-import { rechargeTypeOpts } from '@/lib/options'
+import { RechargeType, WalletRecType, WalletType } from '@/lib/enums'
+import { rechargeTypeOpts, walletRecTypeOpts } from '@/lib/options'
 import { RechargeRec } from '@/types/api/RechargeRec'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Stack, Text } from '@chakra-ui/layout'
@@ -30,6 +30,11 @@ function TableData({ list }: { list: RechargeRec[] }) {
         ),
       },
       {
+        title: '纪录属性',
+        render: (_, row) =>
+          toOptionName(walletRecTypeOpts, row.wallet_rec_type) || '-',
+      },
+      {
         title: '帐号/暱称',
         render: (_, row) => `${row.member.acc}[${row.member.name}]`,
       },
@@ -51,7 +56,7 @@ function TableData({ list }: { list: RechargeRec[] }) {
       },
       {
         title: '备注',
-        render: (_, row) => row.note,
+        render: (_, row) => row.note || '-',
       },
 
       { title: '操作时间', render: (_, row) => toDateTime(row.created_at) },
@@ -68,11 +73,11 @@ function TableData({ list }: { list: RechargeRec[] }) {
           >
             <Text>
               加点： <ColorText num={summary.add_sum} /> 共 {summary.add_count}{' '}
-              筆
+              笔
             </Text>
             <Text>
               扣点： <ColorText num={summary.sub_sum} /> 共 {summary.sub_count}{' '}
-              筆
+              笔
             </Text>
           </Stack>
         </TableSummary>

@@ -1,5 +1,6 @@
 import { ProcessStatus } from '@/lib/enums'
 import { MemberBasic } from '..'
+import { ParentTreeItem } from './Member'
 
 export interface ActivityReview {
   id: number
@@ -15,6 +16,7 @@ export interface ActivityReview {
   member: MemberBasic
   paid_at: number
   updated_at: number
+  parent_tree: ParentTreeItem[]
 }
 
 export interface ActivityReviewListRequest {

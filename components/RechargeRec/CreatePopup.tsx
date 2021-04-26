@@ -1,5 +1,5 @@
 import { usePopupContext } from '@/context/PopupContext'
-import { RechargeType } from '@/lib/enums'
+import { RechargeType, WalletRecType } from '@/lib/enums'
 import useRechargeRecService from '@/utils/services/useRechargeRecService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
@@ -37,6 +37,7 @@ function CreatePopup() {
           amount: null,
           note: '',
           recharge_type: RechargeType.Add,
+          wallet_rec_type: WalletRecType.Manual,
         }}
       />
     </Modal>

@@ -1,4 +1,6 @@
+import { MemberType } from '@/lib/enums'
 import { DateRangeListRequest } from '..'
+import { ParentTreeItem } from './Member'
 export interface MemberReport {
   id: number
   name: string
@@ -30,16 +32,29 @@ export interface MemberReport {
   self_deposit_sum: number
 
   promo_level: number
+
+  win_result: number
+  lose_result: number
+  not_accounting_bet_sum: number
+  self_win_result: number
+  self_lose_result: number
+  self_not_accounting_bet_sum: number
+
+  agent_count: number
+  child_agent_count: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {
   acc?: string
   parent_id?: number
+  agent_id?: number
+  member_type: MemberType
   is_test?: number
 }
 
 export interface MemberReportListResponse {
   list: MemberReport[]
+  parent_tree: ParentTreeItem[]
   total_count: number
   total_page: number
 }

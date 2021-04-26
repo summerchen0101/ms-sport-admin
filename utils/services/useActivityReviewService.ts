@@ -38,8 +38,18 @@ function useActivityReviewService() {
       apiErrHandler(err)
     }
   }
-  const setStatus = async (id: number, status: ProcessStatus) => {
+
+  const setStatus = async ({
+    id,
+    status,
+    bonus,
+  }: {
+    id: number
+    status: ProcessStatus
+    bonus?: number
+  }) => {
     try {
+      await API.edit(id, bonus)
       await API.status(id, status)
       setSearch((s) => ({ ...s }))
     } catch (err) {
