@@ -80,7 +80,11 @@ function PageSearchBar() {
             options={[
               { label: '全部', value: 0 },
               ...walletRecTypeOpts.filter((t) =>
-                [WalletRecType.Manual, WalletRecType.Deposit].includes(t.value),
+                [
+                  WalletRecType.Manual,
+                  WalletRecType.Deposit,
+                  WalletRecType.Activity,
+                ].includes(t.value),
               ),
             ]}
           />

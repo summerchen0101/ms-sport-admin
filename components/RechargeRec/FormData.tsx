@@ -46,10 +46,14 @@ function FormData({
           name="wallet_rec_type"
           rules={[{ required: true }]}
         >
-          <Radio.Group
+          <Select
             options={[
               ...walletRecTypeOpts.filter((t) =>
-                [WalletRecType.Manual, WalletRecType.Deposit].includes(t.value),
+                [
+                  WalletRecType.Manual,
+                  WalletRecType.Deposit,
+                  WalletRecType.Activity,
+                ].includes(t.value),
               ),
             ]}
             disabled={currentType !== RechargeType.Add}

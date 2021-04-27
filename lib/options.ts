@@ -149,7 +149,7 @@ export const walletRecTypeOpts = [
   { label: '结帐修正', value: WalletRecType.AccountingFix },
   { label: '退水', value: WalletRecType.Rebate },
   { label: '转帐', value: WalletRecType.Transfer },
-  { label: '活动奖励', value: WalletRecType.Activirty },
+  { label: '活动奖励', value: WalletRecType.Activity },
 ]
 
 export const dateRangeOpts = [

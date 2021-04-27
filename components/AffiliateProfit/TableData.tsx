@@ -92,7 +92,7 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
         align: 'center',
       },
       {
-        title: '下线派发',
+        title: '派发金额',
         render: (_, row) => (
           <Text fontWeight="bold" color="orange.500">
             {toCurrency(row.amount)}
