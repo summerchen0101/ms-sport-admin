@@ -124,7 +124,7 @@ function TableData({ list }: { list: MemberReport[] }) {
       },
       {
         title: '会员输赢',
-        render: (_, row) => <ColorText num={row.result} />,
+        render: (_, row) => <ColorText num={row.result + row.fee} />,
       },
       {
         title: '退水',

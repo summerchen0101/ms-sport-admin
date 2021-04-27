@@ -65,7 +65,7 @@ function ViewPopup() {
       title: '代理结果',
       render: (_, row) => (
         <ColorText
-          num={numeral(row.result)
+          num={numeral(row.result + row.fee)
             .add(row.rebate)
             .add(row.share_rebate)
             .add(row.fee)

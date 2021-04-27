@@ -54,7 +54,7 @@ function TableData({ list }: { list: ProfitReport[] }) {
       },
       {
         title: '会员结果',
-        render: (_, row) => <ColorText num={row.result} />,
+        render: (_, row) => <ColorText num={row.result + row.fee} />,
       },
     ],
     [],
@@ -90,7 +90,7 @@ function TableData({ list }: { list: ProfitReport[] }) {
               {toCurrency(_.sumBy(list, (t) => t.fee))}
             </Table.Summary.Cell>
             <Table.Summary.Cell index={7}>
-              <ColorText num={_.sumBy(list, (t) => t.result)} />
+              <ColorText num={_.sumBy(list, (t) => t.result + t.fee)} />
             </Table.Summary.Cell>
           </Box>
         )

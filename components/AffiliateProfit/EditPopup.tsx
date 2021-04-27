@@ -137,7 +137,7 @@ function EditPopup() {
           {toCurrency(viewData.valid_bet_sum)}
         </Descriptions.Item>
         <Descriptions.Item label="输赢结果">
-          <ColorText num={viewData.result} />
+          <ColorText num={viewData.result + viewData.fee} />
         </Descriptions.Item>
         <Descriptions.Item label="退水">
           <ColorText num={viewData.rebate} />

@@ -83,7 +83,7 @@ function TableData({ list }: { list: AgentReport[] }) {
         children: [
           {
             title: '结果',
-            render: (_, row) => <ColorText num={row.result} />,
+            render: (_, row) => <ColorText num={row.result + row.fee} />,
           },
           {
             title: '退水',

@@ -59,7 +59,7 @@ function TableData({ list }: { list: DailyReport[] }) {
       },
       {
         title: '代理结果',
-        render: (_, row) => <ColorText num={row.result} />,
+        render: (_, row) => <ColorText num={row.result + row.fee} />,
       },
       {
         title: '公司结果',
@@ -96,7 +96,7 @@ function TableData({ list }: { list: DailyReport[] }) {
               {toCurrency(_.sumBy(list, (t) => t.fee))}
             </Table.Summary.Cell>
             <Table.Summary.Cell index={6}>
-              <ColorText num={_.sumBy(list, (t) => t.result)} />
+              <ColorText num={_.sumBy(list, (t) => t.result + t.fee)} />
             </Table.Summary.Cell>
             <Table.Summary.Cell index={7}>
               <ColorText num={_.sumBy(list, (t) => t.sys_result)} />

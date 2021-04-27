@@ -121,7 +121,7 @@ function TableData({ list }: { list: BetRecord[] }) {
       },
       {
         title: '输赢结果',
-        render: (_, row) => <ColorText num={row.result} />,
+        render: (_, row) => <ColorText num={row.result + row.fee} />,
       },
       {
         title: '占成资讯',
@@ -163,7 +163,7 @@ function TableData({ list }: { list: BetRecord[] }) {
             <ColorText num={betSummary.fee} />
           </TableSummaryItem>
           <TableSummaryItem label="输赢结果">
-            <ColorText num={betSummary.result} />
+            <ColorText num={betSummary.result + betSummary.fee} />
           </TableSummaryItem>
         </TableSummary>
       )}
@@ -192,7 +192,7 @@ function TableData({ list }: { list: BetRecord[] }) {
                   <ColorText num={betSummary.rebate} />
                 </Table.Summary.Cell>
                 <Table.Summary.Cell index={5}>
-                  <ColorText num={betSummary.result} />
+                  <ColorText num={betSummary.result + betSummary.fee} />
                 </Table.Summary.Cell>
                 <Table.Summary.Cell index={6}></Table.Summary.Cell>
               </Table.Summary.Row>
