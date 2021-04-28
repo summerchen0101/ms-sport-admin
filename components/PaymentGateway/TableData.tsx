@@ -15,38 +15,69 @@ function TableData({ list }: { list: PaymentGateway[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<PaymentGateway> = useMemo(
     () => [
-      { title: '金流商戶', render: (_, row) => row.merchant.name },
+      { title: '金流商户', render: (_, row) => row.merchant.name },
       {
         title: '付款方式',
         render: (_, row) => toOptionName(paymentTypeOpts, row.payment_type),
       },
       {
-        title: '单次储值下限',
-        render: (_, row) => row.single_deposit_least,
+        title: '限额设置',
+        children: [
+          {
+            title: '单次储值下限',
+            render: (_, row) => row.single_deposit_least,
+          },
+          {
+            title: '单次储值上限',
+            render: (_, row) => row.single_deposit_limit,
+          },
+          {
+            title: '日储值上限',
+            render: (_, row) => row.deposit_limit_day,
+          },
+          {
+            title: '週储值上限',
+            render: (_, row) => row.deposit_limit_week,
+          },
+          {
+            title: '月储值上限',
+            render: (_, row) => row.deposit_limit_mon,
+          },
+        ],
       },
       {
-        title: '单次储值上限',
-        render: (_, row) => row.single_deposit_limit,
+        title: '手续费设置',
+        children: [
+          {
+            title: '储值手续费(元)',
+            render: (_, row) => row.deposit_fee,
+          },
+          {
+            title: '储值手续费％',
+            render: (_, row) => row.deposit_fee_percent,
+          },
+        ],
       },
       {
-        title: '儲值手續費(元)',
-        render: (_, row) => row.deposit_fee,
-      },
-      {
-        title: '儲值手續費％',
-        render: (_, row) => row.deposit_fee_percent,
-      },
-      {
-        title: '日储值上限',
-        render: (_, row) => row.deposit_limit_day,
-      },
-      {
-        title: '週储值上限',
-        render: (_, row) => row.deposit_limit_week,
-      },
-      {
-        title: '月储值上限',
-        render: (_, row) => row.deposit_limit_mon,
+        title: '银行卡设置',
+        children: [
+          {
+            title: '银行名称',
+            render: (_, row) => '-',
+          },
+          {
+            title: '分行名称',
+            render: (_, row) => '-',
+          },
+          {
+            title: '帐户名称',
+            render: (_, row) => '-',
+          },
+          {
+            title: '银行帐号',
+            render: (_, row) => '-',
+          },
+        ],
       },
 
       {

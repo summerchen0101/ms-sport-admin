@@ -1,8 +1,8 @@
 import { useOptionsContext } from '@/context/OptionsContext'
 import { PaymentType } from '@/lib/enums'
 import { paymentTypeOpts } from '@/lib/options'
-import { SimpleGrid } from '@chakra-ui/layout'
-import { Form, FormInstance, Input, Select, Switch } from 'antd'
+import { SimpleGrid, Spacer } from '@chakra-ui/layout'
+import { Divider, Form, FormInstance, Input, Select, Space, Switch } from 'antd'
 import React, { useEffect } from 'react'
 export interface PaymentGatewayFormProps {
   id?: number
@@ -31,7 +31,7 @@ function FormData({
   }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <SimpleGrid columns={2} spacingX="20px">
+      <SimpleGrid columns={[2, 3]} spacingX="20px">
         <Form.Item
           label="金流商户"
           name="merchant_id"
@@ -50,6 +50,29 @@ function FormData({
         >
           <Select options={paymentTypeOpts} placeholder="请选择" />
         </Form.Item>
+        <Form.Item label="状态" name="is_active" valuePropName="checked">
+          <Switch />
+        </Form.Item>
+
+        <Spacer />
+      </SimpleGrid>
+      <Divider orientation="left">银行资讯</Divider>
+      <SimpleGrid columns={[1, 2]} spacingX="20px">
+        <Form.Item label="银行名称" name="bank_name">
+          <Input />
+        </Form.Item>
+        <Form.Item label="分行名称" name="branch_name">
+          <Input />
+        </Form.Item>
+        <Form.Item label="帐户名称" name="user_name">
+          <Input />
+        </Form.Item>
+        <Form.Item label="银行帐号" name="bank_acc">
+          <Input />
+        </Form.Item>
+      </SimpleGrid>
+      <Divider orientation="left">限额设置</Divider>
+      <SimpleGrid columns={[2, 3]} spacingX="20px">
         <Form.Item
           label="单次储值下限"
           name="single_deposit_least"
@@ -64,20 +87,7 @@ function FormData({
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          label="手续费"
-          name="deposit_fee"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="手续费%"
-          name="deposit_fee_percent"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
+        <Spacer />
         <Form.Item
           label="日储值上限"
           name="deposit_limit_day"
@@ -99,9 +109,22 @@ function FormData({
         >
           <Input />
         </Form.Item>
-
-        <Form.Item label="状态" name="is_active" valuePropName="checked">
-          <Switch />
+      </SimpleGrid>
+      <Divider orientation="left">手续费设置</Divider>
+      <SimpleGrid columns={[2, 3]} spacingX="20px">
+        <Form.Item
+          label="充值手续费(元)"
+          name="deposit_fee"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="充值手续费%"
+          name="deposit_fee_percent"
+          rules={[{ required: true }]}
+        >
+          <Input />
         </Form.Item>
       </SimpleGrid>
     </Form>

@@ -71,6 +71,16 @@ function TableData({ list }: { list: CashflowMerchant[] }) {
         ),
       },
       {
+        title: '线下',
+        render: (_, row) => (
+          <Switch
+            colorScheme="teal"
+            // isChecked={row.is_withdraw}
+            // onChange={(e) => setWithdraw(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
         title: '支付方式',
         render: (_, row) => (
           <TipIconButton
