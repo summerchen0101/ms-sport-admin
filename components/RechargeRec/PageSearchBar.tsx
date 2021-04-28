@@ -3,8 +3,8 @@ import SearchBar from '@/components/SearchBar'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { DateRangeType, RechargeType, WalletRecType } from '@/lib/enums'
-import { rechargeTypeOpts, walletRecTypeOpts } from '@/lib/options'
+import { DateRangeType, RechargeType, WalletRecType, YesNo } from '@/lib/enums'
+import { rechargeTypeOpts, walletRecTypeOpts, yesNoOpts } from '@/lib/options'
 import { RechargeRecListRequest } from '@/types/api/RechargeRec'
 import useRechargeRecService from '@/utils/services/useRechargeRecService'
 import useTransfer from '@/utils/useTransfer'
@@ -22,6 +22,7 @@ type SearchFormType = {
   wallet_rec_type: WalletRecType
   acc: string
   date_range: [Moment, Moment]
+  is_test: number
 }
 
 function PageSearchBar() {
@@ -41,6 +42,7 @@ function PageSearchBar() {
       wallet_rec_type: d.wallet_rec_type,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
+      is_test: d.is_test,
     })
     setIsSearchReady(true)
   }
@@ -92,6 +94,13 @@ function PageSearchBar() {
 
         <InlineFormField name="acc" label="帐号">
           <Input allowClear />
+        </InlineFormField>
+        <InlineFormField
+          name="is_test"
+          label="测试帐号"
+          initialValue={YesNo.No}
+        >
+          <Select options={[{ label: '全部', value: 0 }, ...yesNoOpts]} />
         </InlineFormField>
       </SearchBarContent>
 

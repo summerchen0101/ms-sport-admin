@@ -20,6 +20,7 @@ export interface RechargeRecListRequest extends DateRangeListRequest {
   acc?: string
   recharge_type?: RechargeType
   wallet_rec_type?: WalletRecType
+  is_test?: number
 }
 
 export interface RechargeRecSummary {
