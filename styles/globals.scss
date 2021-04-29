@@ -63,17 +63,24 @@ a {
 }
 
 
-.ant-table-thead > tr > th {
-  background-color: $main-color;
-  color: #fff;
-  padding: 10px 16px;
-  border-color: #8a877c;
-  border-left-width: 1px;
-  border-top-width: 1px;
-  // &:last-of-type {
-  //   border-right-width: 0;
-  // }
+.ant-table {
+  .ant-table-thead > tr > th{
+    background-color: $main-color;
+    color: #fff;
+    padding: 10px 16px;
+    border-color: #8a877c;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    // &:last-of-type {
+    //   border-right-width: 0;
+    // }
+  }
+  .ant-table-thead > tr > th , .ant-table-tbody > tr > td{
+    padding: 12px;
+  }
 }
+
+
 
 .ant-table-tbody > tr.ant-table-row-selected > td {
   background: #eee;

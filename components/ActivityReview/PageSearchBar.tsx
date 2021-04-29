@@ -11,7 +11,9 @@ import { Form, Input, Select, DatePicker } from 'antd'
 import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
+import DateRangeBtns from '../DateRangeBtns'
 import SearchBarButtonRadios from '../SearchBarButtonRadios'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -39,17 +41,47 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      {/* <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-        <DatePicker.RangePicker allowClear />
-      </InlineFormField> */}
-      <InlineFormField name="title" label="标题">
-        <Input allowClear />
-      </InlineFormField>
-      <InlineFormField name="status" label="审核状态" initialValue={0}>
-        <SearchBarButtonRadios<number>
-          options={[{ label: '全部', value: 0 }, ...activityRecStatusOpts]}
-        />
-      </InlineFormField>
+      <SearchBarContent>
+        <InlineFormField
+          name="date_range"
+          label="申請日期"
+          w={['auto', 'auto']}
+        >
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        <InlineFormField name="date_range">
+          <DateRangeBtns />
+        </InlineFormField>
+        <InlineFormField name="title" label="活動">
+          <Select allowClear />
+        </InlineFormField>
+        <InlineFormField name="acc" label="申請人">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField
+          name="confirm_status"
+          label="审核状态"
+          initialValue={0}
+        >
+          <Select
+            options={[{ label: '全部', value: 0 }, ...activityRecStatusOpts]}
+          />
+        </InlineFormField>
+        <InlineFormField
+          name="accounting_status"
+          label="派彩状态"
+          initialValue={0}
+        >
+          <Select
+            options={[{ label: '全部', value: 0 }, ...activityRecStatusOpts]}
+          />
+        </InlineFormField>
+        <InlineFormField name="status" label="完成状态" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...activityRecStatusOpts]}
+          />
+        </InlineFormField>
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton

@@ -61,7 +61,12 @@ function EditPopup() {
         </HStack>
       }
     >
-      <Descriptions bordered size="small" column={1}>
+      <Descriptions
+        bordered
+        size="small"
+        column={1}
+        labelStyle={{ width: '120px' }}
+      >
         <Descriptions.Item label="活动名称">
           {viewData.activity.title}
         </Descriptions.Item>
@@ -81,6 +86,12 @@ function EditPopup() {
         <Descriptions.Item label="申请时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
+        {/* <Descriptions.Item label="審核时间">
+          {toDateTime(viewData.confirmed_at)}
+        </Descriptions.Item>
+        <Descriptions.Item label="派彩时间">
+          {toDateTime(viewData.paid_at)}
+        </Descriptions.Item> */}
       </Descriptions>
     </Modal>
   )
